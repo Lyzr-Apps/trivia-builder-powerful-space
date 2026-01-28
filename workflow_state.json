@@ -1,0 +1,22 @@
+{
+  "workflow_created": true,
+  "agents": [
+    {
+      "name": "Trivia Host Agent",
+      "agent_id": "6979bd37a5d355f8aa489bab",
+      "type": "Single",
+      "status": "created",
+      "provider": "OpenAI",
+      "model": "gpt-4o",
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "response_schema_saved": true
+    }
+  ],
+  "total_agents": 1,
+  "manager_agents": 0,
+  "sub_agents": 0,
+  "single_agents": 1,
+  "creation_completed": true,
+  "timestamp": "2026-01-28T00:00:00Z"
+}

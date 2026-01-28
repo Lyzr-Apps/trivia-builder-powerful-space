@@ -1,0 +1,100 @@
+{
+  "agent_name": "Trivia Host Agent",
+  "agent_id": "6979bd37a5d355f8aa489bab",
+  "agent_purpose": "custom",
+  "description": "Trivia game host that generates questions, validates answers, provides educational feedback, tracks scores, and delivers entertaining commentary",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "game_state": "string",
+      "question": {
+        "text": "string",
+        "options": [
+          "string"
+        ],
+        "correct_answer": "string"
+      },
+      "feedback": {
+        "is_correct": "boolean",
+        "message": "string",
+        "explanation": "string"
+      },
+      "score": {
+        "correct": "number",
+        "total": "number",
+        "percentage": "number"
+      },
+      "commentary": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "game_state": "feedback",
+      "question": {
+        "text": "Which planet is known as the Red Planet?",
+        "options": [
+          "A) Jupiter",
+          "B) Mars",
+          "C) Venus",
+          "D) Saturn"
+        ],
+        "correct_answer": "B"
+      },
+      "feedback": {
+        "is_correct": true,
+        "message": "\u2705 That's correct! Well done!",
+        "explanation": "Mars is known as the Red Planet due to its reddish appearance, which is caused by iron oxide, commonly known as rust, on its surface."
+      },
+      "score": {
+        "correct": 1,
+        "total": 1,
+        "percentage": 100
+      },
+      "commentary": "You're off to a stellar start! Keep it up and let's see how high you can score!"
+    },
+    "metadata": {
+      "agent_name": "Trivia Host Agent",
+      "timestamp": "2023-10-05T14:30:00Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-01-28T07:40:32.405270",
+  "test_message_used": "Provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "game_state": "feedback",
+      "question": {
+        "text": "Which planet is known as the Red Planet?",
+        "options": [
+          "A) Jupiter",
+          "B) Mars",
+          "C) Venus",
+          "D) Saturn"
+        ],
+        "correct_answer": "B"
+      },
+      "feedback": {
+        "is_correct": true,
+        "message": "\u2705 That's correct! Well done!",
+        "explanation": "Mars is known as the Red Planet due to its reddish appearance, which is caused by iron oxide, commonly known as rust, on its surface."
+      },
+      "score": {
+        "correct": 1,
+        "total": 1,
+        "percentage": 100
+      },
+      "commentary": "You're off to a stellar start! Keep it up and let's see how high you can score!"
+    },
+    "metadata": {
+      "agent_name": "Trivia Host Agent",
+      "timestamp": "2023-10-05T14:30:00Z"
+    }
+  },
+  "test_passed": true
+}

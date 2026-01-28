@@ -1,0 +1,41 @@
+{
+  "agent_name": "Trivia Host Agent",
+  "agent_id": "6979bd37a5d355f8aa489bab",
+  "test_message": "My answer is B",
+  "expected_purpose": "assistant",
+  "timestamp": "2026-01-28T07:40:32.399463",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "game_state": "feedback",
+      "question": {
+        "text": "Which planet is known as the Red Planet?",
+        "options": [
+          "A) Jupiter",
+          "B) Mars",
+          "C) Venus",
+          "D) Saturn"
+        ],
+        "correct_answer": "B"
+      },
+      "feedback": {
+        "is_correct": true,
+        "message": "\u2705 That's correct! Well done!",
+        "explanation": "Mars is known as the Red Planet due to its reddish appearance, which is caused by iron oxide, commonly known as rust, on its surface."
+      },
+      "score": {
+        "correct": 1,
+        "total": 1,
+        "percentage": 100
+      },
+      "commentary": "You're off to a stellar start! Keep it up and let's see how high you can score!"
+    },
+    "metadata": {
+      "agent_name": "Trivia Host Agent",
+      "timestamp": "2023-10-05T14:30:00Z"
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"game_state\": \"feedback\",\n    \"question\": {\n      \"text\": \"Which planet is known as the Red Planet?\",\n      \"options\": [\"A) Jupiter\", \"B) Mars\", \"C) Venus\", \"D) Saturn\"],\n      \"correct_answer\": \"B\"\n    },\n    \"feedback\": {\n      \"is_correct\": true,\n      \"message\": \"\u2705 That's correct! Well done!\",\n      \"explanation\": \"Mars is known as the Red Planet due to its reddish appearance, which is caused by iron oxide, commonly known as rust, on its surface.\"\n    },\n    \"score\": {\n      \"correct\": 1,\n      \"total\": 1,\n      \"percentage\": 100\n    },\n    \"commentary\": \"You're off to a stellar start! Keep it up and let's see how high you can score!\"\n  },\n  \"metadata\": {\n    \"agent_name\": \"Trivia Host Agent\",\n    \"timestamp\": \"2023-10-05T14:30:00Z\"\n  }\n}"
+}

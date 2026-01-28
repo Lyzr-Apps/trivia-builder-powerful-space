@@ -1,0 +1,73 @@
+{
+  "workflow_type": "single_agent",
+  "application_name": "Trivia Master",
+  "description": "Interactive trivia game application with category selection, difficulty levels, answer validation, score tracking, and educational feedback",
+  "nodes": [
+    {
+      "id": "user_input",
+      "type": "Input",
+      "label": "User Query",
+      "nodeCategory": "input",
+      "position": {
+        "x": 100,
+        "y": 200
+      }
+    },
+    {
+      "id": "trivia_host_agent",
+      "type": "Agent",
+      "label": "Trivia Host Agent",
+      "nodeCategory": "agent",
+      "agent_id": "6979bd37a5d355f8aa489bab",
+      "position": {
+        "x": 400,
+        "y": 200
+      }
+    },
+    {
+      "id": "trivia_response",
+      "type": "Output",
+      "label": "Trivia Response",
+      "nodeCategory": "end",
+      "position": {
+        "x": 700,
+        "y": 200
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "user_input",
+      "target": "trivia_host_agent",
+      "id": "edge-1"
+    },
+    {
+      "source": "trivia_host_agent",
+      "target": "trivia_response",
+      "id": "edge-2"
+    }
+  ],
+  "agents": [
+    {
+      "agent_id": "6979bd37a5d355f8aa489bab",
+      "name": "Trivia Host Agent",
+      "type": "Single",
+      "description": "Hosts the trivia game by generating questions based on selected category and difficulty, validates user answers, provides educational feedback with correct answers when wrong, tracks score throughout the session, and delivers entertaining commentary",
+      "provider": "OpenAI",
+      "model": "gpt-4o",
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "trigger": "Chat",
+      "tools": [],
+      "knowledge_base": null,
+      "response_schema": "response_schemas/trivia_host_agent_response.json"
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-01-28T00:00:00Z",
+    "total_agents": 1,
+    "has_manager": false,
+    "has_knowledge_base": false,
+    "has_tools": false
+  }
+}
