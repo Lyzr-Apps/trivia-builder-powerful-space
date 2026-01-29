@@ -283,11 +283,12 @@ export default function Home() {
           <div className="w-full max-w-4xl">
             {/* Hero Section */}
             <div className="text-center mb-12">
-              <h2 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-4">
-                Test Your Knowledge
+              <h2 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                Welcome to Your Knowledge Assessment
               </h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Challenge yourself with trivia questions across various topics and difficulty levels
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Evaluate your expertise across multiple domains with our comprehensive trivia platform.
+                Select your preferred category and difficulty level to begin.
               </p>
             </div>
 
