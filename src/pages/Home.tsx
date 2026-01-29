@@ -78,12 +78,12 @@ function CategoryCard({
       onClick={onClick}
       className={`p-6 rounded-lg border-2 transition-all ${
         selected
-          ? 'border-blue-500 bg-blue-500/10'
-          : 'border-gray-700 bg-gray-800 hover:border-gray-600'
+          ? 'border-emerald-400 bg-emerald-500/20 shadow-lg shadow-emerald-500/30'
+          : 'border-slate-600 bg-slate-800/50 hover:border-emerald-400/50 hover:bg-slate-700/50'
       }`}
     >
       <div className="text-4xl mb-2">{categoryIcons[category]}</div>
-      <div className="text-white font-medium">{category}</div>
+      <div className={`font-medium ${selected ? 'text-emerald-50' : 'text-slate-200'}`}>{category}</div>
     </button>
   )
 }
@@ -99,15 +99,17 @@ function DifficultyButton({
   onClick: () => void
 }) {
   const colors: Record<Difficulty, string> = {
-    Easy: selected ? 'bg-green-500' : 'bg-gray-700 hover:bg-green-500/20',
-    Medium: selected ? 'bg-yellow-500' : 'bg-gray-700 hover:bg-yellow-500/20',
-    Hard: selected ? 'bg-red-500' : 'bg-gray-700 hover:bg-red-500/20'
+    Easy: selected ? 'bg-teal-500 shadow-lg shadow-teal-500/40' : 'bg-slate-700/50 hover:bg-teal-500/20 border-2 border-slate-600 hover:border-teal-400/50',
+    Medium: selected ? 'bg-amber-500 shadow-lg shadow-amber-500/40' : 'bg-slate-700/50 hover:bg-amber-500/20 border-2 border-slate-600 hover:border-amber-400/50',
+    Hard: selected ? 'bg-rose-500 shadow-lg shadow-rose-500/40' : 'bg-slate-700/50 hover:bg-rose-500/20 border-2 border-slate-600 hover:border-rose-400/50'
   }
 
   return (
     <button
       onClick={onClick}
-      className={`px-6 py-3 rounded-lg font-medium text-white transition-all ${colors[difficulty]}`}
+      className={`px-6 py-3 rounded-lg font-medium transition-all ${colors[difficulty]} ${
+        selected ? 'text-white' : 'text-slate-200'
+      }`}
     >
       {difficulty}
     </button>
@@ -132,11 +134,11 @@ function AnswerOption({
       disabled={disabled}
       className={`w-full p-4 rounded-lg border-2 text-left transition-all ${
         selected
-          ? 'border-blue-500 bg-blue-500/10'
-          : 'border-gray-700 bg-gray-800 hover:border-gray-600'
+          ? 'border-cyan-400 bg-cyan-500/20 shadow-md shadow-cyan-500/30'
+          : 'border-slate-600 bg-slate-800/50 hover:border-cyan-400/50 hover:bg-slate-700/50'
       } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
-      <div className="text-white font-medium">{option}</div>
+      <div className={`font-medium ${selected ? 'text-cyan-50' : 'text-slate-200'}`}>{option}</div>
     </button>
   )
 }
@@ -245,21 +247,21 @@ export default function Home() {
   // Render setup screen
   if (gameState === 'setup') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
-        <Card className="w-full max-w-3xl bg-gray-900/90 border-gray-700">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 flex items-center justify-center p-4">
+        <Card className="w-full max-w-3xl bg-slate-900/95 border-slate-700 shadow-2xl shadow-emerald-500/10">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
-              <Bot className="h-12 w-12 text-yellow-400" />
+              <Bot className="h-12 w-12 text-emerald-400" />
             </div>
-            <CardTitle className="text-4xl text-white mb-2">Trivia Master</CardTitle>
-            <CardDescription className="text-gray-300 text-lg">
+            <CardTitle className="text-4xl text-emerald-50 mb-2">Trivia Master</CardTitle>
+            <CardDescription className="text-slate-300 text-lg">
               Test your knowledge across various topics
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-8">
             {/* Category Selection */}
             <div>
-              <h3 className="text-white font-semibold mb-4 text-lg">Select Category</h3>
+              <h3 className="text-emerald-50 font-semibold mb-4 text-lg">Select Category</h3>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 {(['Science', 'History', 'Geography', 'Entertainment', 'Sports'] as Category[]).map((cat) => (
                   <CategoryCard
@@ -272,11 +274,11 @@ export default function Home() {
               </div>
             </div>
 
-            <Separator className="bg-gray-700" />
+            <Separator className="bg-slate-700" />
 
             {/* Difficulty Selection */}
             <div>
-              <h3 className="text-white font-semibold mb-4 text-lg">Select Difficulty</h3>
+              <h3 className="text-emerald-50 font-semibold mb-4 text-lg">Select Difficulty</h3>
               <div className="flex gap-4 justify-center">
                 {(['Easy', 'Medium', 'Hard'] as Difficulty[]).map((diff) => (
                   <DifficultyButton
@@ -293,7 +295,7 @@ export default function Home() {
               onClick={startGame}
               disabled={loading}
               size="lg"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white shadow-lg shadow-emerald-500/30"
             >
               {loading ? (
                 <>
@@ -309,7 +311,7 @@ export default function Home() {
             </Button>
 
             {error && (
-              <div className="text-red-400 text-center p-3 bg-red-500/10 rounded-lg">
+              <div className="text-rose-200 text-center p-3 bg-rose-500/20 rounded-lg border border-rose-500/30">
                 {error}
               </div>
             )}
@@ -324,26 +326,26 @@ export default function Home() {
     const { question, score, commentary } = response.result
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
-        <Card className="w-full max-w-3xl bg-gray-900/90 border-gray-700">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 flex items-center justify-center p-4">
+        <Card className="w-full max-w-3xl bg-slate-900/95 border-slate-700 shadow-2xl shadow-cyan-500/10">
           <CardHeader>
             {/* Score Display */}
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center gap-2">
-                <Trophy className="h-5 w-5 text-yellow-400" />
-                <span className="text-white font-semibold">
+                <Trophy className="h-5 w-5 text-amber-400" />
+                <span className="text-emerald-50 font-semibold">
                   Score: {score.correct}/{score.total}
                 </span>
               </div>
-              <Badge variant="outline" className="text-white border-gray-600">
+              <Badge variant="outline" className="text-cyan-300 border-cyan-600 bg-cyan-500/10">
                 {score.percentage}%
               </Badge>
             </div>
 
             {/* Progress Bar */}
-            <Progress value={score.percentage} className="mb-4" />
+            <Progress value={score.percentage} className="mb-4 bg-slate-700 [&>div]:bg-gradient-to-r [&>div]:from-emerald-500 [&>div]:to-cyan-500" />
 
-            <CardTitle className="text-2xl text-white">{question?.text}</CardTitle>
+            <CardTitle className="text-2xl text-emerald-50">{question?.text}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Answer Options */}
@@ -361,10 +363,10 @@ export default function Home() {
 
             {/* Commentary */}
             {commentary && (
-              <div className="p-4 bg-purple-500/10 border border-purple-500/30 rounded-lg">
+              <div className="p-4 bg-violet-500/10 border border-violet-500/30 rounded-lg">
                 <div className="flex items-start gap-2">
-                  <Sparkles className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <p className="text-gray-300 text-sm">{commentary}</p>
+                  <Sparkles className="h-5 w-5 text-violet-400 mt-0.5 flex-shrink-0" />
+                  <p className="text-slate-200 text-sm">{commentary}</p>
                 </div>
               </div>
             )}
@@ -373,7 +375,7 @@ export default function Home() {
               onClick={submitAnswer}
               disabled={!selectedAnswer || loading}
               size="lg"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white shadow-lg shadow-cyan-500/30"
             >
               {loading ? (
                 <>
@@ -386,7 +388,7 @@ export default function Home() {
             </Button>
 
             {error && (
-              <div className="text-red-400 text-center p-3 bg-red-500/10 rounded-lg">
+              <div className="text-rose-200 text-center p-3 bg-rose-500/20 rounded-lg border border-rose-500/30">
                 {error}
               </div>
             )}
@@ -401,44 +403,44 @@ export default function Home() {
     const { question, feedback, score, commentary } = response.result
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
-        <Card className="w-full max-w-3xl bg-gray-900/90 border-gray-700">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 flex items-center justify-center p-4">
+        <Card className="w-full max-w-3xl bg-slate-900/95 border-slate-700 shadow-2xl shadow-cyan-500/10">
           <CardHeader>
             {/* Score Display */}
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center gap-2">
-                <Trophy className="h-5 w-5 text-yellow-400" />
-                <span className="text-white font-semibold">
+                <Trophy className="h-5 w-5 text-amber-400" />
+                <span className="text-emerald-50 font-semibold">
                   Score: {score.correct}/{score.total}
                 </span>
               </div>
-              <Badge variant="outline" className="text-white border-gray-600">
+              <Badge variant="outline" className="text-cyan-300 border-cyan-600 bg-cyan-500/10">
                 {score.percentage}%
               </Badge>
             </div>
 
             {/* Progress Bar */}
-            <Progress value={score.percentage} className="mb-4" />
+            <Progress value={score.percentage} className="mb-4 bg-slate-700 [&>div]:bg-gradient-to-r [&>div]:from-emerald-500 [&>div]:to-cyan-500" />
 
-            <CardTitle className="text-2xl text-white">{question?.text}</CardTitle>
+            <CardTitle className="text-2xl text-emerald-50">{question?.text}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Feedback */}
             {feedback && (
               <div>
-                <div className={`flex items-center gap-3 mb-4 p-4 rounded-lg ${
+                <div className={`flex items-center gap-3 mb-4 p-4 rounded-lg shadow-lg ${
                   feedback.is_correct
-                    ? 'bg-green-500/10 border border-green-500/30'
-                    : 'bg-red-500/10 border border-red-500/30'
+                    ? 'bg-emerald-500/20 border-2 border-emerald-400/50 shadow-emerald-500/30'
+                    : 'bg-rose-500/20 border-2 border-rose-400/50 shadow-rose-500/30'
                 }`}>
                   {feedback.is_correct ? (
-                    <CheckCircle className="h-8 w-8 text-green-400 flex-shrink-0" />
+                    <CheckCircle className="h-8 w-8 text-emerald-300 flex-shrink-0" />
                   ) : (
-                    <XCircle className="h-8 w-8 text-red-400 flex-shrink-0" />
+                    <XCircle className="h-8 w-8 text-rose-300 flex-shrink-0" />
                   )}
                   <div>
                     <p className={`font-semibold text-lg ${
-                      feedback.is_correct ? 'text-green-400' : 'text-red-400'
+                      feedback.is_correct ? 'text-emerald-100' : 'text-rose-100'
                     }`}>
                       {feedback.message}
                     </p>
@@ -446,18 +448,18 @@ export default function Home() {
                 </div>
 
                 {/* Explanation */}
-                <div className="p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
-                  <h4 className="text-white font-semibold mb-2">Explanation</h4>
-                  <p className="text-gray-300">{feedback.explanation}</p>
+                <div className="p-4 bg-sky-500/10 border border-sky-500/30 rounded-lg">
+                  <h4 className="text-sky-200 font-semibold mb-2">Explanation</h4>
+                  <p className="text-slate-200">{feedback.explanation}</p>
                 </div>
               </div>
             )}
 
             {/* Correct Answer */}
             {question && (
-              <div className="p-3 bg-gray-800 rounded-lg">
-                <p className="text-gray-400 text-sm mb-1">Correct Answer:</p>
-                <p className="text-green-400 font-semibold">
+              <div className="p-3 bg-slate-800/70 rounded-lg border border-slate-700">
+                <p className="text-slate-400 text-sm mb-1">Correct Answer:</p>
+                <p className="text-emerald-300 font-semibold">
                   {question.options.find(opt => opt.startsWith(question.correct_answer))}
                 </p>
               </div>
@@ -465,10 +467,10 @@ export default function Home() {
 
             {/* Commentary */}
             {commentary && (
-              <div className="p-4 bg-purple-500/10 border border-purple-500/30 rounded-lg">
+              <div className="p-4 bg-violet-500/10 border border-violet-500/30 rounded-lg">
                 <div className="flex items-start gap-2">
-                  <Sparkles className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <p className="text-gray-300 text-sm">{commentary}</p>
+                  <Sparkles className="h-5 w-5 text-violet-400 mt-0.5 flex-shrink-0" />
+                  <p className="text-slate-200 text-sm">{commentary}</p>
                 </div>
               </div>
             )}
@@ -477,7 +479,7 @@ export default function Home() {
               onClick={nextQuestion}
               disabled={loading}
               size="lg"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white shadow-lg shadow-cyan-500/30"
             >
               {loading ? (
                 <>
@@ -490,7 +492,7 @@ export default function Home() {
             </Button>
 
             {error && (
-              <div className="text-red-400 text-center p-3 bg-red-500/10 rounded-lg">
+              <div className="text-rose-200 text-center p-3 bg-rose-500/20 rounded-lg border border-rose-500/30">
                 {error}
               </div>
             )}
@@ -506,49 +508,54 @@ export default function Home() {
 
     let performanceMessage = ''
     let performanceColor = ''
+    let performanceGradient = ''
 
     if (score.percentage >= 80) {
       performanceMessage = 'Outstanding Performance!'
-      performanceColor = 'text-green-400'
+      performanceColor = 'text-emerald-300'
+      performanceGradient = 'from-emerald-500/30 to-teal-500/30 border-emerald-500/40'
     } else if (score.percentage >= 60) {
       performanceMessage = 'Good Job!'
-      performanceColor = 'text-blue-400'
+      performanceColor = 'text-cyan-300'
+      performanceGradient = 'from-cyan-500/30 to-blue-500/30 border-cyan-500/40'
     } else if (score.percentage >= 40) {
       performanceMessage = 'Nice Try!'
-      performanceColor = 'text-yellow-400'
+      performanceColor = 'text-amber-300'
+      performanceGradient = 'from-amber-500/30 to-orange-500/30 border-amber-500/40'
     } else {
       performanceMessage = 'Keep Practicing!'
-      performanceColor = 'text-orange-400'
+      performanceColor = 'text-orange-300'
+      performanceGradient = 'from-orange-500/30 to-rose-500/30 border-orange-500/40'
     }
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
-        <Card className="w-full max-w-2xl bg-gray-900/90 border-gray-700">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 flex items-center justify-center p-4">
+        <Card className="w-full max-w-2xl bg-slate-900/95 border-slate-700 shadow-2xl shadow-emerald-500/10">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
-              <Trophy className="h-16 w-16 text-yellow-400" />
+              <Trophy className="h-16 w-16 text-amber-400" />
             </div>
-            <CardTitle className="text-4xl text-white mb-2">Game Over!</CardTitle>
+            <CardTitle className="text-4xl text-emerald-50 mb-2">Game Over!</CardTitle>
             <CardDescription className={`text-2xl font-semibold ${performanceColor}`}>
               {performanceMessage}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Final Score */}
-            <div className="text-center p-8 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg border border-blue-500/30">
-              <p className="text-gray-400 text-lg mb-2">Final Score</p>
+            <div className={`text-center p-8 bg-gradient-to-br ${performanceGradient} rounded-lg border shadow-lg`}>
+              <p className="text-slate-300 text-lg mb-2">Final Score</p>
               <p className="text-6xl font-bold text-white mb-2">
                 {score.correct}/{score.total}
               </p>
-              <p className="text-3xl text-blue-400">{score.percentage}%</p>
+              <p className={`text-3xl ${performanceColor}`}>{score.percentage}%</p>
             </div>
 
             {/* Commentary */}
             {commentary && (
-              <div className="p-4 bg-purple-500/10 border border-purple-500/30 rounded-lg">
+              <div className="p-4 bg-violet-500/10 border border-violet-500/30 rounded-lg">
                 <div className="flex items-start gap-2">
-                  <Sparkles className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                  <p className="text-gray-300">{commentary}</p>
+                  <Sparkles className="h-5 w-5 text-violet-400 mt-0.5 flex-shrink-0" />
+                  <p className="text-slate-200">{commentary}</p>
                 </div>
               </div>
             )}
@@ -556,7 +563,7 @@ export default function Home() {
             <Button
               onClick={playAgain}
               size="lg"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white shadow-lg shadow-emerald-500/30"
             >
               <RefreshCw className="mr-2 h-5 w-5" />
               Play Again
@@ -569,10 +576,10 @@ export default function Home() {
 
   // Fallback/loading state
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 flex items-center justify-center">
       <div className="text-center">
-        <Loader2 className="h-12 w-12 text-white animate-spin mx-auto mb-4" />
-        <p className="text-white text-lg">Loading Trivia Master...</p>
+        <Loader2 className="h-12 w-12 text-emerald-400 animate-spin mx-auto mb-4" />
+        <p className="text-emerald-50 text-lg">Loading Trivia Master...</p>
       </div>
     </div>
   )
