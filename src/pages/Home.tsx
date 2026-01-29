@@ -14,7 +14,12 @@ import {
   Trophy,
   Loader2,
   Sparkles,
-  Bot
+  Bot,
+  Rocket,
+  BookOpen,
+  Globe,
+  Film,
+  Dumbbell
 } from 'lucide-react'
 
 // Agent Configuration
@@ -65,12 +70,21 @@ function CategoryCard({
   selected: boolean
   onClick: () => void
 }) {
-  const categoryIcons: Record<Category, string> = {
-    Science: '🔬',
-    History: '📚',
-    Geography: '🌍',
-    Entertainment: '🎬',
-    Sports: '⚽'
+  const getCategoryIcon = (cat: Category) => {
+    const iconClass = `h-10 w-10 ${selected ? 'text-emerald-300' : 'text-slate-300'}`
+
+    switch(cat) {
+      case 'Science':
+        return <Rocket className={iconClass} />
+      case 'History':
+        return <BookOpen className={iconClass} />
+      case 'Geography':
+        return <Globe className={iconClass} />
+      case 'Entertainment':
+        return <Film className={iconClass} />
+      case 'Sports':
+        return <Dumbbell className={iconClass} />
+    }
   }
 
   return (
@@ -82,7 +96,7 @@ function CategoryCard({
           : 'border-slate-600 bg-slate-800/50 hover:border-emerald-400/50 hover:bg-slate-700/50'
       }`}
     >
-      <div className="text-4xl mb-2">{categoryIcons[category]}</div>
+      <div className="mb-2">{getCategoryIcon(category)}</div>
       <div className={`font-medium ${selected ? 'text-emerald-50' : 'text-slate-200'}`}>{category}</div>
     </button>
   )
