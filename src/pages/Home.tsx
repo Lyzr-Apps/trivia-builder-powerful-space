@@ -99,9 +99,9 @@ function DifficultyButton({
   onClick: () => void
 }) {
   const colors: Record<Difficulty, string> = {
-    Easy: selected ? 'bg-teal-500 shadow-lg shadow-teal-500/40' : 'bg-slate-700/50 hover:bg-teal-500/20 border-2 border-slate-600 hover:border-teal-400/50',
-    Medium: selected ? 'bg-amber-500 shadow-lg shadow-amber-500/40' : 'bg-slate-700/50 hover:bg-amber-500/20 border-2 border-slate-600 hover:border-amber-400/50',
-    Hard: selected ? 'bg-rose-500 shadow-lg shadow-rose-500/40' : 'bg-slate-700/50 hover:bg-rose-500/20 border-2 border-slate-600 hover:border-rose-400/50'
+    Easy: selected ? 'bg-orange-500 shadow-lg shadow-orange-500/50' : 'bg-slate-700/50 hover:bg-orange-500/20 border-2 border-slate-600 hover:border-orange-400/50',
+    Medium: selected ? 'bg-orange-500 shadow-lg shadow-orange-500/50' : 'bg-slate-700/50 hover:bg-orange-500/20 border-2 border-slate-600 hover:border-orange-400/50',
+    Hard: selected ? 'bg-orange-500 shadow-lg shadow-orange-500/50' : 'bg-slate-700/50 hover:bg-orange-500/20 border-2 border-slate-600 hover:border-orange-400/50'
   }
 
   return (
