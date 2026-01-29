@@ -375,7 +375,7 @@ export default function Home() {
               onClick={submitAnswer}
               disabled={!selectedAnswer || loading}
               size="lg"
-              className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white shadow-lg shadow-cyan-500/30"
+              className="w-full bg-gradient-to-r from-amber-700 to-orange-800 hover:from-amber-800 hover:to-orange-900 text-white shadow-lg shadow-amber-700/30"
             >
               {loading ? (
                 <>
