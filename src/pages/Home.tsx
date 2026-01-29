@@ -60,6 +60,20 @@ type GameState = 'setup' | 'question' | 'feedback' | 'game_over'
 type Category = 'Science' | 'History' | 'Geography' | 'Entertainment' | 'Sports'
 type Difficulty = 'Easy' | 'Medium' | 'Hard'
 
+// Header component
+function Header() {
+  return (
+    <header className="w-full bg-white border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex items-center gap-3">
+          <Bot className="h-8 w-8 text-gray-800" />
+          <h1 className="text-2xl font-bold text-gray-900">Hello World</h1>
+        </div>
+      </div>
+    </header>
+  )
+}
+
 // Category selection component
 function CategoryCard({
   category,
@@ -71,7 +85,7 @@ function CategoryCard({
   onClick: () => void
 }) {
   const getCategoryIcon = (cat: Category) => {
-    const iconClass = `h-10 w-10 ${selected ? 'text-emerald-300' : 'text-slate-300'}`
+    const iconClass = `h-10 w-10 ${selected ? 'text-white' : 'text-gray-600'}`
 
     switch(cat) {
       case 'Science':
@@ -90,14 +104,14 @@ function CategoryCard({
   return (
     <button
       onClick={onClick}
-      className={`p-6 rounded-lg border-2 transition-all flex flex-col items-center justify-center ${
+      className={`p-6 rounded-xl border-2 transition-all flex flex-col items-center justify-center ${
         selected
-          ? 'border-emerald-400 bg-emerald-500/20 shadow-lg shadow-emerald-500/30'
-          : 'border-slate-600 bg-slate-800/50 hover:border-emerald-400/50 hover:bg-slate-700/50'
+          ? 'border-red-500 bg-gradient-to-br from-red-500 to-rose-600 shadow-lg'
+          : 'border-gray-200 bg-white hover:border-red-300 hover:shadow-md'
       }`}
     >
       <div className="mb-2">{getCategoryIcon(category)}</div>
-      <div className={`font-medium ${selected ? 'text-emerald-50' : 'text-slate-200'}`}>{category}</div>
+      <div className={`font-semibold ${selected ? 'text-white' : 'text-gray-800'}`}>{category}</div>
     </button>
   )
 }
@@ -112,17 +126,13 @@ function DifficultyButton({
   selected: boolean
   onClick: () => void
 }) {
-  const colors: Record<Difficulty, string> = {
-    Easy: selected ? 'bg-orange-500 shadow-lg shadow-orange-500/50' : 'bg-slate-700/50 hover:bg-orange-500/20 border-2 border-slate-600 hover:border-orange-400/50',
-    Medium: selected ? 'bg-orange-500 shadow-lg shadow-orange-500/50' : 'bg-slate-700/50 hover:bg-orange-500/20 border-2 border-slate-600 hover:border-orange-400/50',
-    Hard: selected ? 'bg-orange-500 shadow-lg shadow-orange-500/50' : 'bg-slate-700/50 hover:bg-orange-500/20 border-2 border-slate-600 hover:border-orange-400/50'
-  }
-
   return (
     <button
       onClick={onClick}
-      className={`px-6 py-3 rounded-lg font-medium transition-all ${colors[difficulty]} ${
-        selected ? 'text-white' : 'text-slate-200'
+      className={`px-8 py-3 rounded-lg font-semibold transition-all ${
+        selected
+          ? 'bg-gradient-to-r from-red-500 to-rose-600 text-white shadow-lg'
+          : 'bg-white border-2 border-gray-200 text-gray-700 hover:border-red-300 hover:shadow-md'
       }`}
     >
       {difficulty}
@@ -148,11 +158,11 @@ function AnswerOption({
       disabled={disabled}
       className={`w-full p-4 rounded-lg border-2 text-left transition-all ${
         selected
-          ? 'border-cyan-400 bg-cyan-500/20 shadow-md shadow-cyan-500/30'
-          : 'border-slate-600 bg-slate-800/50 hover:border-cyan-400/50 hover:bg-slate-700/50'
+          ? 'border-red-500 bg-red-50 shadow-md'
+          : 'border-gray-200 bg-white hover:border-red-300 hover:shadow-sm'
       } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
-      <div className={`font-medium ${selected ? 'text-cyan-50' : 'text-slate-200'}`}>{option}</div>
+      <div className={`font-medium ${selected ? 'text-red-900' : 'text-gray-900'}`}>{option}</div>
     </button>
   )
 }
@@ -261,76 +271,84 @@ export default function Home() {
   // Render setup screen
   if (gameState === 'setup') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 flex items-center justify-center p-4">
-        <Card className="w-full max-w-3xl bg-slate-900/95 border-slate-700 shadow-2xl shadow-emerald-500/10">
-          <CardHeader className="text-center">
-            <div className="flex justify-center mb-4">
-              <Bot className="h-12 w-12 text-emerald-400" />
-            </div>
-            <CardTitle className="text-4xl text-emerald-50 mb-2">Hello World</CardTitle>
-            <CardDescription className="text-slate-300 text-lg">
-              Test your knowledge across various topics
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-8">
-            {/* Category Selection */}
-            <div>
-              <h3 className="text-emerald-50 font-semibold mb-4 text-lg">Select Category</h3>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                {(['Science', 'History', 'Geography', 'Entertainment', 'Sports'] as Category[]).map((cat) => (
-                  <CategoryCard
-                    key={cat}
-                    category={cat}
-                    selected={category === cat}
-                    onClick={() => setCategory(cat)}
-                  />
-                ))}
-              </div>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+
+        <div className="flex items-center justify-center px-4 py-12 sm:py-20">
+          <div className="w-full max-w-4xl">
+            {/* Hero Section */}
+            <div className="text-center mb-12">
+              <h2 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-4">
+                Test Your Knowledge
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Challenge yourself with trivia questions across various topics and difficulty levels
+              </p>
             </div>
 
-            <Separator className="bg-slate-700" />
+            {/* Setup Card */}
+            <Card className="border-gray-200 shadow-xl bg-white">
+              <CardContent className="p-8 space-y-8">
+                {/* Category Selection */}
+                <div>
+                  <h3 className="text-gray-900 font-bold mb-5 text-xl">Select Category</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    {(['Science', 'History', 'Geography', 'Entertainment', 'Sports'] as Category[]).map((cat) => (
+                      <CategoryCard
+                        key={cat}
+                        category={cat}
+                        selected={category === cat}
+                        onClick={() => setCategory(cat)}
+                      />
+                    ))}
+                  </div>
+                </div>
 
-            {/* Difficulty Selection */}
-            <div>
-              <h3 className="text-emerald-50 font-semibold mb-4 text-lg">Select Difficulty</h3>
-              <div className="flex gap-4 justify-center">
-                {(['Easy', 'Medium', 'Hard'] as Difficulty[]).map((diff) => (
-                  <DifficultyButton
-                    key={diff}
-                    difficulty={diff}
-                    selected={difficulty === diff}
-                    onClick={() => setDifficulty(diff)}
-                  />
-                ))}
-              </div>
-            </div>
+                <Separator className="bg-gray-200" />
 
-            <Button
-              onClick={startGame}
-              disabled={loading}
-              size="lg"
-              className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white shadow-lg shadow-emerald-500/30"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Starting Game...
-                </>
-              ) : (
-                <>
-                  <Play className="mr-2 h-5 w-5" />
-                  Start Game
-                </>
-              )}
-            </Button>
+                {/* Difficulty Selection */}
+                <div>
+                  <h3 className="text-gray-900 font-bold mb-5 text-xl">Select Difficulty</h3>
+                  <div className="flex gap-4 justify-center">
+                    {(['Easy', 'Medium', 'Hard'] as Difficulty[]).map((diff) => (
+                      <DifficultyButton
+                        key={diff}
+                        difficulty={diff}
+                        selected={difficulty === diff}
+                        onClick={() => setDifficulty(diff)}
+                      />
+                    ))}
+                  </div>
+                </div>
 
-            {error && (
-              <div className="text-rose-200 text-center p-3 bg-rose-500/20 rounded-lg border border-rose-500/30">
-                {error}
-              </div>
-            )}
-          </CardContent>
-        </Card>
+                <Button
+                  onClick={startGame}
+                  disabled={loading}
+                  size="lg"
+                  className="w-full bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white shadow-lg text-lg py-6"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      Starting Game...
+                    </>
+                  ) : (
+                    <>
+                      <Play className="mr-2 h-5 w-5" />
+                      Start Game
+                    </>
+                  )}
+                </Button>
+
+                {error && (
+                  <div className="text-red-700 text-center p-3 bg-red-50 rounded-lg border border-red-200">
+                    {error}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     )
   }
@@ -340,74 +358,81 @@ export default function Home() {
     const { question, score, commentary } = response.result
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 flex items-center justify-center p-4">
-        <Card className="w-full max-w-3xl bg-slate-900/95 border-slate-700 shadow-2xl shadow-cyan-500/10">
-          <CardHeader>
-            {/* Score Display */}
-            <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center gap-2">
-                <Trophy className="h-5 w-5 text-amber-400" />
-                <span className="text-emerald-50 font-semibold">
-                  Score: {score.correct}/{score.total}
-                </span>
-              </div>
-              <Badge variant="outline" className="text-cyan-300 border-cyan-600 bg-cyan-500/10">
-                {score.percentage}%
-              </Badge>
-            </div>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
 
-            {/* Progress Bar */}
-            <Progress value={score.percentage} className="mb-4 bg-slate-700 [&>div]:bg-gradient-to-r [&>div]:from-emerald-500 [&>div]:to-cyan-500" />
-
-            <CardTitle className="text-2xl text-emerald-50">{question?.text}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {/* Answer Options */}
-            <div className="space-y-3">
-              {question?.options.map((option, index) => (
-                <AnswerOption
-                  key={index}
-                  option={option}
-                  selected={selectedAnswer === option}
-                  disabled={loading}
-                  onClick={() => setSelectedAnswer(option)}
-                />
-              ))}
-            </div>
-
-            {/* Commentary */}
-            {commentary && (
-              <div className="p-4 bg-violet-500/10 border border-violet-500/30 rounded-lg">
-                <div className="flex items-start gap-2">
-                  <Sparkles className="h-5 w-5 text-violet-400 mt-0.5 flex-shrink-0" />
-                  <p className="text-slate-200 text-sm">{commentary}</p>
+        <div className="flex items-center justify-center px-4 py-8">
+          <Card className="w-full max-w-3xl border-gray-200 shadow-xl bg-white">
+            <CardHeader>
+              {/* Score Display */}
+              <div className="flex justify-between items-center mb-4">
+                <div className="flex items-center gap-2">
+                  <Trophy className="h-5 w-5 text-amber-500" />
+                  <span className="text-gray-900 font-semibold">
+                    Score: {score.correct}/{score.total}
+                  </span>
                 </div>
+                <Badge variant="outline" className="text-red-600 border-red-300 bg-red-50 font-semibold">
+                  {score.percentage}%
+                </Badge>
               </div>
-            )}
 
-            <Button
-              onClick={submitAnswer}
-              disabled={!selectedAnswer || loading}
-              size="lg"
-              className="w-full bg-gradient-to-r from-amber-700 to-orange-800 hover:from-amber-800 hover:to-orange-900 text-white shadow-lg shadow-amber-700/30"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Submitting...
-                </>
-              ) : (
-                'Submit Answer'
+              {/* Progress Bar */}
+              <Progress
+                value={score.percentage}
+                className="mb-4 bg-gray-200 [&>div]:bg-gradient-to-r [&>div]:from-red-500 [&>div]:to-rose-600"
+              />
+
+              <CardTitle className="text-2xl text-gray-900 leading-relaxed">{question?.text}</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Answer Options */}
+              <div className="space-y-3">
+                {question?.options.map((option, index) => (
+                  <AnswerOption
+                    key={index}
+                    option={option}
+                    selected={selectedAnswer === option}
+                    disabled={loading}
+                    onClick={() => setSelectedAnswer(option)}
+                  />
+                ))}
+              </div>
+
+              {/* Commentary */}
+              {commentary && (
+                <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                  <div className="flex items-start gap-2">
+                    <Sparkles className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                    <p className="text-gray-700 text-sm">{commentary}</p>
+                  </div>
+                </div>
               )}
-            </Button>
 
-            {error && (
-              <div className="text-rose-200 text-center p-3 bg-rose-500/20 rounded-lg border border-rose-500/30">
-                {error}
-              </div>
-            )}
-          </CardContent>
-        </Card>
+              <Button
+                onClick={submitAnswer}
+                disabled={!selectedAnswer || loading}
+                size="lg"
+                className="w-full bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white shadow-lg"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  'Submit Answer'
+                )}
+              </Button>
+
+              {error && (
+                <div className="text-red-700 text-center p-3 bg-red-50 rounded-lg border border-red-200">
+                  {error}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
     )
   }
@@ -417,101 +442,108 @@ export default function Home() {
     const { question, feedback, score, commentary } = response.result
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 flex items-center justify-center p-4">
-        <Card className="w-full max-w-3xl bg-slate-900/95 border-slate-700 shadow-2xl shadow-cyan-500/10">
-          <CardHeader>
-            {/* Score Display */}
-            <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center gap-2">
-                <Trophy className="h-5 w-5 text-amber-400" />
-                <span className="text-emerald-50 font-semibold">
-                  Score: {score.correct}/{score.total}
-                </span>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+
+        <div className="flex items-center justify-center px-4 py-8">
+          <Card className="w-full max-w-3xl border-gray-200 shadow-xl bg-white">
+            <CardHeader>
+              {/* Score Display */}
+              <div className="flex justify-between items-center mb-4">
+                <div className="flex items-center gap-2">
+                  <Trophy className="h-5 w-5 text-amber-500" />
+                  <span className="text-gray-900 font-semibold">
+                    Score: {score.correct}/{score.total}
+                  </span>
+                </div>
+                <Badge variant="outline" className="text-red-600 border-red-300 bg-red-50 font-semibold">
+                  {score.percentage}%
+                </Badge>
               </div>
-              <Badge variant="outline" className="text-cyan-300 border-cyan-600 bg-cyan-500/10">
-                {score.percentage}%
-              </Badge>
-            </div>
 
-            {/* Progress Bar */}
-            <Progress value={score.percentage} className="mb-4 bg-slate-700 [&>div]:bg-gradient-to-r [&>div]:from-emerald-500 [&>div]:to-cyan-500" />
+              {/* Progress Bar */}
+              <Progress
+                value={score.percentage}
+                className="mb-4 bg-gray-200 [&>div]:bg-gradient-to-r [&>div]:from-red-500 [&>div]:to-rose-600"
+              />
 
-            <CardTitle className="text-2xl text-emerald-50">{question?.text}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            {/* Feedback */}
-            {feedback && (
-              <div>
-                <div className={`flex items-center gap-3 mb-4 p-4 rounded-lg shadow-lg ${
-                  feedback.is_correct
-                    ? 'bg-emerald-500/20 border-2 border-emerald-400/50 shadow-emerald-500/30'
-                    : 'bg-rose-500/20 border-2 border-rose-400/50 shadow-rose-500/30'
-                }`}>
-                  {feedback.is_correct ? (
-                    <CheckCircle className="h-8 w-8 text-emerald-300 flex-shrink-0" />
-                  ) : (
-                    <XCircle className="h-8 w-8 text-rose-300 flex-shrink-0" />
-                  )}
-                  <div>
-                    <p className={`font-semibold text-lg ${
-                      feedback.is_correct ? 'text-emerald-100' : 'text-rose-100'
-                    }`}>
-                      {feedback.message}
-                    </p>
+              <CardTitle className="text-2xl text-gray-900 leading-relaxed">{question?.text}</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Feedback */}
+              {feedback && (
+                <div>
+                  <div className={`flex items-center gap-3 mb-4 p-4 rounded-lg shadow-md ${
+                    feedback.is_correct
+                      ? 'bg-green-50 border-2 border-green-400'
+                      : 'bg-red-50 border-2 border-red-400'
+                  }`}>
+                    {feedback.is_correct ? (
+                      <CheckCircle className="h-8 w-8 text-green-600 flex-shrink-0" />
+                    ) : (
+                      <XCircle className="h-8 w-8 text-red-600 flex-shrink-0" />
+                    )}
+                    <div>
+                      <p className={`font-semibold text-lg ${
+                        feedback.is_correct ? 'text-green-800' : 'text-red-800'
+                      }`}>
+                        {feedback.message}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Explanation */}
+                  <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <h4 className="text-blue-900 font-semibold mb-2">Explanation</h4>
+                    <p className="text-gray-700">{feedback.explanation}</p>
                   </div>
                 </div>
-
-                {/* Explanation */}
-                <div className="p-4 bg-sky-500/10 border border-sky-500/30 rounded-lg">
-                  <h4 className="text-sky-200 font-semibold mb-2">Explanation</h4>
-                  <p className="text-slate-200">{feedback.explanation}</p>
-                </div>
-              </div>
-            )}
-
-            {/* Correct Answer */}
-            {question && (
-              <div className="p-3 bg-slate-800/70 rounded-lg border border-slate-700">
-                <p className="text-slate-400 text-sm mb-1">Correct Answer:</p>
-                <p className="text-emerald-300 font-semibold">
-                  {question.options.find(opt => opt.startsWith(question.correct_answer))}
-                </p>
-              </div>
-            )}
-
-            {/* Commentary */}
-            {commentary && (
-              <div className="p-4 bg-violet-500/10 border border-violet-500/30 rounded-lg">
-                <div className="flex items-start gap-2">
-                  <Sparkles className="h-5 w-5 text-violet-400 mt-0.5 flex-shrink-0" />
-                  <p className="text-slate-200 text-sm">{commentary}</p>
-                </div>
-              </div>
-            )}
-
-            <Button
-              onClick={nextQuestion}
-              disabled={loading}
-              size="lg"
-              className="w-full bg-gradient-to-r from-amber-700 to-orange-800 hover:from-amber-800 hover:to-orange-900 text-white shadow-lg shadow-amber-700/30"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Loading...
-                </>
-              ) : (
-                'Next Question'
               )}
-            </Button>
 
-            {error && (
-              <div className="text-rose-200 text-center p-3 bg-rose-500/20 rounded-lg border border-rose-500/30">
-                {error}
-              </div>
-            )}
-          </CardContent>
-        </Card>
+              {/* Correct Answer */}
+              {question && (
+                <div className="p-3 bg-gray-100 rounded-lg border border-gray-200">
+                  <p className="text-gray-600 text-sm mb-1">Correct Answer:</p>
+                  <p className="text-green-700 font-semibold">
+                    {question.options.find(opt => opt.startsWith(question.correct_answer))}
+                  </p>
+                </div>
+              )}
+
+              {/* Commentary */}
+              {commentary && (
+                <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                  <div className="flex items-start gap-2">
+                    <Sparkles className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                    <p className="text-gray-700 text-sm">{commentary}</p>
+                  </div>
+                </div>
+              )}
+
+              <Button
+                onClick={nextQuestion}
+                disabled={loading}
+                size="lg"
+                className="w-full bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white shadow-lg"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Loading...
+                  </>
+                ) : (
+                  'Next Question'
+                )}
+              </Button>
+
+              {error && (
+                <div className="text-red-700 text-center p-3 bg-red-50 rounded-lg border border-red-200">
+                  {error}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
     )
   }
@@ -522,78 +554,85 @@ export default function Home() {
 
     let performanceMessage = ''
     let performanceColor = ''
-    let performanceGradient = ''
+    let performanceBg = ''
 
     if (score.percentage >= 80) {
       performanceMessage = 'Outstanding Performance!'
-      performanceColor = 'text-emerald-300'
-      performanceGradient = 'from-emerald-500/30 to-teal-500/30 border-emerald-500/40'
+      performanceColor = 'text-green-600'
+      performanceBg = 'bg-gradient-to-br from-green-50 to-emerald-50 border-green-300'
     } else if (score.percentage >= 60) {
       performanceMessage = 'Good Job!'
-      performanceColor = 'text-cyan-300'
-      performanceGradient = 'from-cyan-500/30 to-blue-500/30 border-cyan-500/40'
+      performanceColor = 'text-blue-600'
+      performanceBg = 'bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-300'
     } else if (score.percentage >= 40) {
       performanceMessage = 'Nice Try!'
-      performanceColor = 'text-amber-300'
-      performanceGradient = 'from-amber-500/30 to-orange-500/30 border-amber-500/40'
+      performanceColor = 'text-amber-600'
+      performanceBg = 'bg-gradient-to-br from-amber-50 to-orange-50 border-amber-300'
     } else {
       performanceMessage = 'Keep Practicing!'
-      performanceColor = 'text-orange-300'
-      performanceGradient = 'from-orange-500/30 to-rose-500/30 border-orange-500/40'
+      performanceColor = 'text-orange-600'
+      performanceBg = 'bg-gradient-to-br from-orange-50 to-red-50 border-orange-300'
     }
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 flex items-center justify-center p-4">
-        <Card className="w-full max-w-2xl bg-slate-900/95 border-slate-700 shadow-2xl shadow-emerald-500/10">
-          <CardHeader className="text-center">
-            <div className="flex justify-center mb-4">
-              <Trophy className="h-16 w-16 text-amber-400" />
-            </div>
-            <CardTitle className="text-4xl text-emerald-50 mb-2">Game Over!</CardTitle>
-            <CardDescription className={`text-2xl font-semibold ${performanceColor}`}>
-              {performanceMessage}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            {/* Final Score */}
-            <div className={`text-center p-8 bg-gradient-to-br ${performanceGradient} rounded-lg border shadow-lg`}>
-              <p className="text-slate-300 text-lg mb-2">Final Score</p>
-              <p className="text-6xl font-bold text-white mb-2">
-                {score.correct}/{score.total}
-              </p>
-              <p className={`text-3xl ${performanceColor}`}>{score.percentage}%</p>
-            </div>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
 
-            {/* Commentary */}
-            {commentary && (
-              <div className="p-4 bg-violet-500/10 border border-violet-500/30 rounded-lg">
-                <div className="flex items-start gap-2">
-                  <Sparkles className="h-5 w-5 text-violet-400 mt-0.5 flex-shrink-0" />
-                  <p className="text-slate-200">{commentary}</p>
-                </div>
+        <div className="flex items-center justify-center px-4 py-12">
+          <Card className="w-full max-w-2xl border-gray-200 shadow-xl bg-white">
+            <CardHeader className="text-center">
+              <div className="flex justify-center mb-4">
+                <Trophy className="h-16 w-16 text-amber-500" />
               </div>
-            )}
+              <CardTitle className="text-4xl text-gray-900 mb-2">Game Over!</CardTitle>
+              <CardDescription className={`text-2xl font-semibold ${performanceColor}`}>
+                {performanceMessage}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Final Score */}
+              <div className={`text-center p-8 ${performanceBg} rounded-xl border-2 shadow-lg`}>
+                <p className="text-gray-700 text-lg mb-2">Final Score</p>
+                <p className="text-6xl font-bold text-gray-900 mb-2">
+                  {score.correct}/{score.total}
+                </p>
+                <p className={`text-3xl font-bold ${performanceColor}`}>{score.percentage}%</p>
+              </div>
 
-            <Button
-              onClick={playAgain}
-              size="lg"
-              className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white shadow-lg shadow-emerald-500/30"
-            >
-              <RefreshCw className="mr-2 h-5 w-5" />
-              Play Again
-            </Button>
-          </CardContent>
-        </Card>
+              {/* Commentary */}
+              {commentary && (
+                <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                  <div className="flex items-start gap-2">
+                    <Sparkles className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                    <p className="text-gray-700">{commentary}</p>
+                  </div>
+                </div>
+              )}
+
+              <Button
+                onClick={playAgain}
+                size="lg"
+                className="w-full bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white shadow-lg text-lg py-6"
+              >
+                <RefreshCw className="mr-2 h-5 w-5" />
+                Play Again
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     )
   }
 
   // Fallback/loading state
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 flex items-center justify-center">
-      <div className="text-center">
-        <Loader2 className="h-12 w-12 text-emerald-400 animate-spin mx-auto mb-4" />
-        <p className="text-emerald-50 text-lg">Loading Trivia Master...</p>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <div className="flex items-center justify-center min-h-[80vh]">
+        <div className="text-center">
+          <Loader2 className="h-12 w-12 text-red-500 animate-spin mx-auto mb-4" />
+          <p className="text-gray-900 text-lg">Loading Trivia Master...</p>
+        </div>
       </div>
     </div>
   )
