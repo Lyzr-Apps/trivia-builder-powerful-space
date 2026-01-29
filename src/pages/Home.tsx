@@ -76,7 +76,7 @@ function CategoryCard({
   return (
     <button
       onClick={onClick}
-      className={`p-6 rounded-lg border-2 transition-all ${
+      className={`p-6 rounded-lg border-2 transition-all flex flex-col items-center justify-center ${
         selected
           ? 'border-emerald-400 bg-emerald-500/20 shadow-lg shadow-emerald-500/30'
           : 'border-slate-600 bg-slate-800/50 hover:border-emerald-400/50 hover:bg-slate-700/50'
