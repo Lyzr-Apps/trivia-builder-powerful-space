@@ -267,7 +267,7 @@ export default function Home() {
             <div className="flex justify-center mb-4">
               <Bot className="h-12 w-12 text-emerald-400" />
             </div>
-            <CardTitle className="text-4xl text-emerald-50 mb-2">Trivia Master</CardTitle>
+            <CardTitle className="text-4xl text-emerald-50 mb-2">Hello World</CardTitle>
             <CardDescription className="text-slate-300 text-lg">
               Test your knowledge across various topics
             </CardDescription>
