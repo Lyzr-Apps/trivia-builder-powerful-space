@@ -297,7 +297,7 @@ export default function Home() {
               <CardContent className="p-8 space-y-8">
                 {/* Category Selection */}
                 <div>
-                  <h3 className="text-gray-900 font-bold mb-5 text-xl">Select Category</h3>
+                  <h3 className="text-amber-800 font-bold mb-5 text-xl">Select Category</h3>
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                     {(['Science', 'History', 'Geography', 'Entertainment', 'Sports'] as Category[]).map((cat) => (
                       <CategoryCard
