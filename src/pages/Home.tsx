@@ -67,9 +67,11 @@ function Header() {
     <header className="w-full bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-200 flex items-center justify-center">
-            <User className="h-6 w-6 text-blue-900" />
-          </div>
+          <img
+            src="https://asset.lyzr.app/k7ESQXrU"
+            alt="Profile"
+            className="h-10 w-10 rounded-full object-cover"
+          />
           <h1 className="text-2xl font-bold text-gray-900">Hello World</h1>
         </div>
       </div>
