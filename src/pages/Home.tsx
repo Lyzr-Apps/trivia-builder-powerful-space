@@ -13,7 +13,8 @@ import {
   XCircle,
   Trophy,
   Loader2,
-  Sparkles
+  Sparkles,
+  Bot
 } from 'lucide-react'
 
 // Agent Configuration
@@ -248,7 +249,7 @@ export default function Home() {
         <Card className="w-full max-w-3xl bg-gray-900/90 border-gray-700">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
-              <Sparkles className="h-12 w-12 text-yellow-400" />
+              <Bot className="h-12 w-12 text-yellow-400" />
             </div>
             <CardTitle className="text-4xl text-white mb-2">Trivia Master</CardTitle>
             <CardDescription className="text-gray-300 text-lg">
