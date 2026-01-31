@@ -243,25 +243,35 @@ export default function Home() {
     setError(null)
     setSelectedAnswer(null)
 
-    const result = await callAIAgent(
-      'Give me the next question',
-      AGENT_ID,
-      { session_id: sessionId }
-    )
+    try {
+      const result = await callAIAgent(
+        'Next question please',
+        AGENT_ID,
+        { session_id: sessionId }
+      )
 
-    setLoading(false)
+      setLoading(false)
 
-    if (result.success && result.response.status === 'success') {
-      const triviaResponse = result.response as TriviaResponse
-      setResponse(triviaResponse)
+      if (result.success && result.response.status === 'success') {
+        const triviaResponse = result.response as TriviaResponse
+        setResponse(triviaResponse)
 
-      if (triviaResponse.result.game_state === 'question') {
-        setGameState('question')
-      } else if (triviaResponse.result.game_state === 'game_over') {
-        setGameState('game_over')
+        // Check game state and update accordingly
+        if (triviaResponse.result.game_state === 'question') {
+          setGameState('question')
+        } else if (triviaResponse.result.game_state === 'game_over') {
+          setGameState('game_over')
+        } else if (triviaResponse.result.game_state === 'feedback') {
+          // In case agent returns feedback state, stay on feedback
+          setGameState('feedback')
+        }
+      } else {
+        setError(result.error || 'Failed to get next question')
       }
-    } else {
-      setError(result.error || 'Failed to get next question')
+    } catch (err) {
+      setLoading(false)
+      setError('An error occurred while fetching the next question')
+      console.error('Next question error:', err)
     }
   }
 
