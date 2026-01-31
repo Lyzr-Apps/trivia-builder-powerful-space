@@ -457,6 +457,20 @@ export default function Home() {
   if (gameState === 'feedback' && response?.result) {
     const { question, feedback, score, commentary } = response.result
 
+    // Safety check: if no feedback or score, something went wrong
+    if (!feedback || !score) {
+      return (
+        <div className="min-h-screen bg-gray-50">
+          <Header />
+          <div className="flex items-center justify-center min-h-[80vh]">
+            <div className="text-center">
+              <p className="text-gray-900 text-lg">Loading feedback...</p>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
     return (
       <div className="min-h-screen bg-gray-50">
         <Header />
